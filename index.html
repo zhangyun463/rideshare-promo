@@ -69,9 +69,6 @@
             transition: 0.2s;
             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
         }
-        .hero-bg-img {
-            border-radius: 42px;
-        }
         .hero h2 {
             font-size: 1.9rem;
             font-weight: 800;
@@ -359,6 +356,15 @@
             border-color: #ffb3b3;
             color: #d14;
         }
+        .export-btn {
+            background: #07c160;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 40px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
         @media (max-width: 600px) {
             .hero h2 { font-size: 1.5rem; }
             .container { padding: 0 16px 32px; }
@@ -451,6 +457,10 @@
                 <div class="form-row">
                     <button id="resetAllDataBtn" style="background:#ffefef; border:1px solid #ffb7b7; color:#bc4e4e;">重置所有数据为默认</button>
                 </div>
+                <div class="form-row">
+                    <button id="exportFullHtmlBtn" class="export-btn">📤 导出当前配置为完整HTML文件（用于更新部署）</button>
+                    <p style="font-size:0.7rem; color:#6f816d;">点击后将下载一个包含当前所有图片&数据的新HTML文件，替换原文件上传到GitHub即可让所有访客看到最新内容。</p>
+                </div>
             </div>
         </div>
     </div>
@@ -481,7 +491,6 @@
 
     let siteData = JSON.parse(JSON.stringify(defaultData));
 
-    // 存储key
     const STORAGE_KEY = "rideshare_manage_data";
 
     function loadData() {
@@ -513,7 +522,7 @@
     function renderMainPage() {
         // hero
         const heroDiv = document.getElementById('heroArea');
-        if (siteData.hero.bgImage && siteData.hero.bgImage.startsWith('http') || siteData.hero.bgImage.startsWith('data:')) {
+        if (siteData.hero.bgImage && (siteData.hero.bgImage.startsWith('http') || siteData.hero.bgImage.startsWith('data:'))) {
             heroDiv.style.backgroundImage = `url(${siteData.hero.bgImage})`;
             heroDiv.style.backgroundSize = 'cover';
             heroDiv.style.backgroundPosition = 'center';
@@ -528,7 +537,7 @@
         const featuresGrid = document.getElementById('featuresGrid');
         featuresGrid.innerHTML = siteData.features.map(f => `
             <div class="feature-card">
-                <div class="feature-icon">${f.icon || '✨'}</div>
+                <div class="feature-icon">${escapeHtml(f.icon || '✨')}</div>
                 <h4>${escapeHtml(f.title)}</h4>
                 <p>${escapeHtml(f.desc)}</p>
             </div>
@@ -600,7 +609,7 @@
         });
     }
 
-    function openCarEditModal(car) {
+    function openCarEditModal(car, isNew=false) {
         const modalHtml = `
             <div id="dynamicCarForm" class="form-row">
                 <label>车型名称</label>
@@ -613,49 +622,44 @@
                 <input type="file" id="editCarImgUpload" accept="image/*">
                 <div id="carImgPreviewArea"><img id="editCarImgPreview" src="${car.img || ''}" style="max-width:100px; max-height:80px; border-radius:12px; margin-top:6px;"></div>
                 <div style="display:flex; gap:12px; margin-top:12px;">
-                    <button id="confirmCarEdit" style="background:#07c160; color:white;">保存修改</button>
+                    <button id="confirmCarEdit" style="background:#07c160; color:white;">${isNew ? '新增车型' : '保存修改'}</button>
                     <button id="cancelCarEdit">取消</button>
                 </div>
             </div>
         `;
-        const modal = document.createElement('div');
-        modal.className = 'modal-mask active';
-        modal.style.position = 'fixed';
-        modal.innerHTML = `<div class="admin-panel" style="max-width:450px;"><div class="panel-header"><h3>编辑车型</h3><button class="close-panel" id="closeDynamic">×</button></div><div class="panel-body">${modalHtml}</div></div>`;
-        document.body.appendChild(modal);
-        const closeDynamic = () => modal.remove();
-        modal.querySelector('#closeDynamic').addEventListener('click', closeDynamic);
-        modal.addEventListener('click', (e) => { if(e.target === modal) closeDynamic(); });
-        const imgUpload = modal.querySelector('#editCarImgUpload');
-        const preview = modal.querySelector('#editCarImgPreview');
-        imgUpload.addEventListener('change', (e) => {
+        const modalDiv = document.createElement('div');
+        modalDiv.className = 'modal-mask active';
+        modalDiv.innerHTML = `<div class="admin-panel" style="max-width:450px;"><div class="panel-header"><h3>${isNew ? '新增车型' : '编辑车型'}</h3><button class="close-panel" id="closeDynamic">×</button></div><div class="panel-body">${modalHtml}</div></div>`;
+        document.body.appendChild(modalDiv);
+        const close = () => modalDiv.remove();
+        modalDiv.querySelector('#closeDynamic').addEventListener('click', close);
+        modalDiv.addEventListener('click', (e) => { if(e.target === modalDiv) close(); });
+        const upload = modalDiv.querySelector('#editCarImgUpload');
+        const preview = modalDiv.querySelector('#editCarImgPreview');
+        upload.addEventListener('change', (e) => {
             const file = e.target.files[0];
-            if(file) {
-                const reader = new FileReader();
-                reader.onload = (ev) => { preview.src = ev.target.result; };
-                reader.readAsDataURL(file);
-            }
+            if(file) { const reader = new FileReader(); reader.onload = ev => preview.src = ev.target.result; reader.readAsDataURL(file); }
         });
-        modal.querySelector('#confirmCarEdit').addEventListener('click', () => {
-            const newName = modal.querySelector('#editCarName').value.trim();
-            const newPrice = modal.querySelector('#editCarPrice').value.trim();
-            const newDesc = modal.querySelector('#editCarDesc').value.trim();
-            if(!newName) return alert('请输入车型名称');
-            let newImg = car.img;
-            if(imgUpload.files.length > 0) {
+        modalDiv.querySelector('#confirmCarEdit').addEventListener('click', () => {
+            const name = modalDiv.querySelector('#editCarName').value.trim();
+            const price = modalDiv.querySelector('#editCarPrice').value.trim();
+            const desc = modalDiv.querySelector('#editCarDesc').value.trim();
+            if(!name) return alert('请输入车型名称');
+            const handleSave = (imgData) => {
+                if(isNew) {
+                    siteData.cars.push({ id: 'c_' + Date.now(), name, price, desc, img: imgData || '' });
+                } else {
+                    car.name = name; car.price = price; car.desc = desc; if(imgData) car.img = imgData;
+                }
+                saveToLocal(); renderManageCars(); renderMainPage(); close();
+            };
+            if(upload.files.length) {
                 const reader = new FileReader();
-                reader.onload = (ev) => {
-                    car.img = ev.target.result;
-                    car.name = newName; car.price = newPrice; car.desc = newDesc;
-                    saveToLocal(); renderManageCars(); renderMainPage(); closeDynamic();
-                };
-                reader.readAsDataURL(imgUpload.files[0]);
-            } else {
-                car.name = newName; car.price = newPrice; car.desc = newDesc; car.img = newImg;
-                saveToLocal(); renderManageCars(); renderMainPage(); closeDynamic();
-            }
+                reader.onload = ev => handleSave(ev.target.result);
+                reader.readAsDataURL(upload.files[0]);
+            } else { handleSave(isNew ? '' : car.img); }
         });
-        modal.querySelector('#cancelCarEdit')?.addEventListener('click', closeDynamic);
+        modalDiv.querySelector('#cancelCarEdit')?.addEventListener('click', close);
     }
 
     function renderManageFeatures() {
@@ -701,68 +705,62 @@
         });
     }
 
-    // 新增车型模态框
+    // 新增车型
     function openAddCarModal() {
         const newCar = { id: 'c_' + Date.now(), name: '新车型', price: '价格/天', desc: '车型亮点描述', img: '' };
         openCarEditModal(newCar, true);
     }
-    // 覆盖新增模式
-    const originalOpenCarEditModal = openCarEditModal;
-    window.openCarEditModal = function(car, isNew=false) {
-        const modalHtml = `
-            <div id="dynamicCarForm" class="form-row">
-                <label>车型名称</label>
-                <input id="editCarName" value="${escapeHtml(car.name)}">
-                <label>价格文案</label>
-                <input id="editCarPrice" value="${escapeHtml(car.price)}">
-                <label>描述说明</label>
-                <textarea id="editCarDesc" rows="2">${escapeHtml(car.desc)}</textarea>
-                <label>车辆图片</label>
-                <input type="file" id="editCarImgUpload" accept="image/*">
-                <div id="carImgPreviewArea"><img id="editCarImgPreview" src="${car.img || ''}" style="max-width:100px; max-height:80px;"></div>
-                <div style="display:flex; gap:12px; margin-top:12px;">
-                    <button id="confirmCarEdit" style="background:#07c160;">${isNew ? '新增车型' : '保存修改'}</button>
-                    <button id="cancelCarEdit">取消</button>
-                </div>
-            </div>
-        `;
-        const modalDiv = document.createElement('div');
-        modalDiv.className = 'modal-mask active';
-        modalDiv.innerHTML = `<div class="admin-panel" style="max-width:450px;"><div class="panel-header"><h3>${isNew ? '新增车型' : '编辑车型'}</h3><button class="close-panel" id="closeDynamic">×</button></div><div class="panel-body">${modalHtml}</div></div>`;
-        document.body.appendChild(modalDiv);
-        const close = () => modalDiv.remove();
-        modalDiv.querySelector('#closeDynamic').addEventListener('click', close);
-        modalDiv.addEventListener('click', (e) => { if(e.target === modalDiv) close(); });
-        const upload = modalDiv.querySelector('#editCarImgUpload');
-        const preview = modalDiv.querySelector('#editCarImgPreview');
-        upload.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if(file) { const reader = new FileReader(); reader.onload = ev => preview.src = ev.target.result; reader.readAsDataURL(file); }
-        });
-        modalDiv.querySelector('#confirmCarEdit').addEventListener('click', () => {
-            const name = modalDiv.querySelector('#editCarName').value.trim();
-            const price = modalDiv.querySelector('#editCarPrice').value.trim();
-            const desc = modalDiv.querySelector('#editCarDesc').value.trim();
-            if(!name) return alert('请输入车型名称');
-            const handleSave = (imgData) => {
-                if(isNew) {
-                    siteData.cars.push({ id: 'c_' + Date.now(), name, price, desc, img: imgData || '' });
-                } else {
-                    car.name = name; car.price = price; car.desc = desc; if(imgData) car.img = imgData;
-                }
-                saveToLocal(); renderManageCars(); renderMainPage(); close();
-            };
-            if(upload.files.length) {
-                const reader = new FileReader();
-                reader.onload = ev => handleSave(ev.target.result);
-                reader.readAsDataURL(upload.files[0]);
-            } else { handleSave(isNew ? '' : car.img); }
-        });
-        modalDiv.querySelector('#cancelCarEdit')?.addEventListener('click', close);
-    };
-    window.openCarEditModal = openCarEditModal;
 
-    // 初始化管理面板事件
+    // 导出完整HTML文件（包含当前配置）
+    function exportFullHtml() {
+        // 获取当前所有数据（深拷贝）
+        const currentData = JSON.parse(JSON.stringify(siteData));
+        // 获取当前HTML文件内容，并替换其中的默认数据部分
+        const htmlContent = document.documentElement.outerHTML;
+        // 构建新HTML：需要将当前数据注入到脚本中，覆盖默认数据和localStorage初始化
+        // 方法：创建一个新的HTML字符串，在现有基础上，在script中增加一个覆盖初始数据的逻辑。
+        // 由于代码中加载数据时会先读取localStorage，我们可以修改初始赋值逻辑，直接让默认数据等于currentData。
+        // 最简单：生成一份独立HTML，其中siteData直接等于currentData，并去除localStorage读取，强制使用内置数据。
+        // 我们复制当前页面结构，但修改JavaScript部分，将默认数据替换为currentData，并取消localStorage读取（但保留保存功能以便后续继续修改）。
+        // 更好的做法：保留localStorage机制，但将初始数据设置为currentData，这样新页面第一次加载就会使用currentData，后续修改仍然保存到localStorage。
+        
+        // 获取当前页面的完整HTML文本
+        let html = document.documentElement.outerHTML;
+        // 在</head>前插入一个meta确保字符集
+        // 由于outerHTML可能包含当前作用域的变量，我们需要构建新字符串
+        // 更稳妥：通过fetch获取当前页面源码并替换？但更简单：基于当前模板重建。
+        // 这里直接利用Blob生成新文件，将siteData序列化为JSON字符串，并在页面加载时覆盖localStorage初始数据。
+        // 我们可以在页面最顶部script中先设置localStorage，然后再加载。
+        const exportDataStr = JSON.stringify(currentData);
+        // 构建新的HTML内容，在原页面基础上增加一段初始化localStorage的脚本
+        // 注意：原页面加载时，会调用loadData()从localStorage读取，如果没有则使用defaultData。
+        // 我们在页面开始处强行写入localStorage，确保loadData读取到的是当前数据。
+        const injectScript = `
+        <script>
+            // 注入当前配置到localStorage，确保首次加载即使用最新内容
+            (function() {
+                const exportedData = ${exportDataStr};
+                if (exportedData) {
+                    localStorage.setItem('${STORAGE_KEY}', JSON.stringify(exportedData));
+                }
+            })();
+        <\/script>
+        `;
+        // 在<head>后插入
+        let newHtml = html.replace('</head>', injectScript + '</head>');
+        // 下载
+        const blob = new Blob([newHtml], { type: 'text/html' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.href = url;
+        link.download = 'rideshare_updated.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        alert('已导出包含当前配置的HTML文件。请将该文件重命名为 index.html 并上传到GitHub覆盖原文件，之后所有访客都将看到最新内容。');
+    }
+
     function bindAdminEvents() {
         document.getElementById('openAdminBtn').onclick = () => {
             document.getElementById('adminModal').classList.add('active');
@@ -835,6 +833,12 @@
                     document.getElementById('heroBgPreview').src = '';
                 }
                 alert('已重置为默认内容');
+            }
+        };
+        // 导出按钮
+        document.getElementById('exportFullHtmlBtn').onclick = () => {
+            if(confirm('导出当前配置为HTML文件？导出的文件将包含您当前所有车型图片、优势、背景等配置。下载后请替换原文件并重新部署。')) {
+                exportFullHtml();
             }
         };
     }
