@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>网约车伙伴招募 | 灵活高收 · 轻松开跑</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: #f5faf5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1a2e1a;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 48px;
+        }
+
+        /* 头部导航 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #07c160, #0f9d4e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .manage-btn {
+            background: white;
+            border: 1px solid #07c16060;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #07c160;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .manage-btn:active { transform: scale(0.96); background: #f0faf0; }
+
+        /* Hero 区 */
+        .hero {
+            background: linear-gradient(120deg, #eaf9ea, #ffffff);
+            border-radius: 42px;
+            padding: 32px 24px;
+            margin-bottom: 40px;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        .hero-bg-img {
+            border-radius: 42px;
+        }
+        .hero h2 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #0a2f0a;
+        }
+        .hero p {
+            font-size: 1rem;
+            color: #2b4b2b;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* 优势区域 */
+        .section-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 40px 0 24px;
+            position: relative;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .feature-card {
+            background: white;
+            padding: 24px 16px;
+            border-radius: 32px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid #e2f0e2;
+            transition: 0.2s;
+        }
+        .feature-icon {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+        }
+        .feature-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #1f3b1f;
+        }
+        .feature-card p {
+            color: #5f7460;
+            font-size: 0.85rem;
+        }
+
+        /* 车型列表 */
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 26px;
+            margin: 20px 0 30px;
+        }
+        .car-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            border: 1px solid #e8f3e8;
+        }
+        .car-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #eef4ea;
+            display: block;
+        }
+        .car-info {
+            padding: 18px 16px 20px;
+        }
+        .car-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .car-price {
+            color: #07c160;
+            font-weight: 800;
+            font-size: 1.25rem;
+            margin: 8px 0;
+        }
+        .car-desc {
+            color: #6f816d;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+        .consult-btn {
+            background: #f0f9f0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: #07c160;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.2s;
+        }
+        .consult-btn:active { background: #e2f0e2; }
+
+        /* 联系区域 */
+        .contact-bar {
+            background: #ffffffd9;
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            padding: 16px 24px;
+            margin: 48px 0 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid #cee6ce;
+        }
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+        .contact-info a {
+            color: #07c160;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8ba088;
+            margin-top: 32px;
+        }
+        button {
+            cursor: pointer;
+        }
+
+        /* 模态框 管理后台 */
+        .modal-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        .modal-mask.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .admin-panel {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 30px 40px rgba(0,0,0,0.2);
+        }
+        .panel-header {
+            padding: 18px 22px;
+            background: #fafffa;
+            border-bottom: 1px solid #deecde;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .panel-header h3 {
+            font-size: 1.4rem;
+            color: #07c160;
+        }
+        .close-panel {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #7c9a7c;
+        }
+        .panel-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 12px 20px 0;
+            background: white;
+            border-bottom: 1px solid #e2f0e2;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: 40px;
+            color: #5c795c;
+        }
+        .tab-btn.active {
+            background: #07c16020;
+            color: #07c160;
+        }
+        .panel-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .item-card {
+            background: #f9fef9;
+            border-radius: 24px;
+            padding: 16px;
+            border: 1px solid #e0ecdf;
+        }
+        .item-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            justify-content: flex-end;
+        }
+        .edit-item, .del-item, .add-btn {
+            background: white;
+            border: 1px solid #cfdfcf;
+            padding: 6px 16px;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .add-btn {
+            background: #07c160;
+            color: white;
+            border: none;
+            margin-bottom: 16px;
+        }
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .form-row label {
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        .form-row input, .form-row textarea {
+            padding: 10px 14px;
+            border-radius: 30px;
+            border: 1px solid #cde0cd;
+            font-size: 0.85rem;
+        }
+        .img-preview {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 16px;
+            background: #eef2ec;
+        }
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button.danger {
+            background: #fff0f0;
+            border-color: #ffb3b3;
+            color: #d14;
+        }
+        @media (max-width: 600px) {
+            .hero h2 { font-size: 1.5rem; }
+            .container { padding: 0 16px 32px; }
+            .contact-bar { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <div class="logo">🚖 快车伙伴 · 网约车直招</div>
+        <button class="manage-btn" id="openAdminBtn">⚙️ 管理中心 · 自定义图片/价格</button>
+    </div>
+
+    <!-- Hero 动态区域 -->
+    <div class="hero" id="heroArea" style="background-image: var(--hero-bg, linear-gradient(120deg, #eaf9ea, #ffffff)); background-size: cover;">
+        <h2 id="heroTitle">高收入 · 更自由</h2>
+        <p id="heroSub">合规营运车辆 | 保险保养全包 | 流水秒到账</p>
+    </div>
+
+    <!-- 优势区域 -->
+    <div class="section-title">✨ 为什么选择我们</div>
+    <div class="features-grid" id="featuresGrid"></div>
+
+    <!-- 车型报价 + 图片展示 -->
+    <div class="section-title">🚘 热门车型 · 透明一口价</div>
+    <div class="cars-grid" id="carsGrid"></div>
+
+    <!-- 联系栏 可编辑电话 -->
+    <div class="contact-bar" id="contactBar">
+        <div class="contact-info">
+            <span>📞 咨询热线：<strong id="contactPhone">177****8888</strong></span>
+            <span>💬 微信同号｜随时咨询</span>
+        </div>
+        <div>
+            <span>🏢 合规运力中心 · 快速上岗</span>
+        </div>
+    </div>
+    <div class="footer">
+        * 所有车型均支持试跑体验 | 一人一车/双班灵活选择 | 价格透明无隐形收费
+    </div>
+</div>
+
+<!-- 管理后台模态框 -->
+<div id="adminModal" class="modal-mask">
+    <div class="admin-panel">
+        <div class="panel-header">
+            <h3>📋 内容管理中心</h3>
+            <button class="close-panel" id="closeAdminBtn">&times;</button>
+        </div>
+        <div class="panel-tabs">
+            <button class="tab-btn active" data-tab="carsTab">🚕 车型管理（图片/价格）</button>
+            <button class="tab-btn" data-tab="featuresTab">🌟 优势管理</button>
+            <button class="tab-btn" data-tab="basicTab">⚙️ 基础设置</button>
+        </div>
+        <div class="panel-body">
+            <!-- 车型管理 -->
+            <div id="carsTab" class="tab-content active">
+                <button class="add-btn" id="addCarBtn">+ 新增车型</button>
+                <div id="carsManageList" class="item-list"></div>
+            </div>
+            <!-- 优势管理 -->
+            <div id="featuresTab" class="tab-content">
+                <button class="add-btn" id="addFeatureBtn">+ 新增优势</button>
+                <div id="featuresManageList" class="item-list"></div>
+            </div>
+            <!-- 基础设置 -->
+            <div id="basicTab" class="tab-content">
+                <div class="form-row">
+                    <label>🏙️ Hero 背景图片 (点击上传)</label>
+                    <input type="file" id="heroBgUpload" accept="image/*">
+                    <div style="margin-top: 8px;"><img id="heroBgPreview" style="max-width:100%; max-height:120px; border-radius:20px;" src=""></div>
+                    <button id="resetHeroBg" style="margin-top:8px; background:#f0f0f0;">恢复默认渐变</button>
+                </div>
+                <div class="form-row">
+                    <label>📢 主标题</label>
+                    <input type="text" id="editHeroTitle" placeholder="主标题">
+                </div>
+                <div class="form-row">
+                    <label>📄 副标题</label>
+                    <input type="text" id="editHeroSub" placeholder="副标题">
+                </div>
+                <div class="form-row">
+                    <label>📞 咨询电话（显示在底部）</label>
+                    <input type="text" id="editContactPhone" placeholder="联系电话">
+                </div>
+                <div class="form-row">
+                    <button id="saveBasicBtn" style="background:#07c160; color:white; border:none; padding:12px; border-radius:60px;">保存基础信息</button>
+                </div>
+                <div class="form-row">
+                    <button id="resetAllDataBtn" style="background:#ffefef; border:1px solid #ffb7b7; color:#bc4e4e;">重置所有数据为默认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ---------- 默认数据 ----------
+    const defaultData = {
+        hero: {
+            bgImage: "", // 空表示渐变
+            title: "高收入 · 更自由",
+            subtitle: "合规营运车辆 | 保险保养全包 | 流水秒到账"
+        },
+        features: [
+            { id: "f1", icon: "💰", title: "收入透明", desc: "每日流水自主提现，无抽成，多劳多得，月入过万很轻松" },
+            { id: "f2", icon: "⚡", title: "极速上岗", desc: "最快3天提车，协助办理人证/车证，专业培训支持" },
+            { id: "f3", icon: "🛡️", title: "养车无忧", desc: "公司承担保险、保养、维修，只跑车，不分心" },
+            { id: "f4", icon: "📈", title: "灵活模式", desc: "日租/周租/月租，一人一车或双班，自由选择" }
+        ],
+        cars: [
+            { id: "c1", name: "比亚迪·秦EV", price: "低至 159元/天", desc: "续航450km，快充30分钟，空间宽敞，合规网约车专用", img: "" },
+            { id: "c2", name: "广汽埃安 S", price: "179元/天", desc: "炫酷外观，舒适座舱，百公里电耗仅12度，省电多赚", img: "" },
+            { id: "c3", name: "荣威 Ei5", price: "149元/天", desc: "旅行车大空间，营运版质保，售后全包，日租超值", img: "" },
+            { id: "c4", name: "吉利几何A", price: "169元/天", desc: "科技内饰，L2辅助，续航扎实，司机好评率高", img: "" }
+        ],
+        contactPhone: "400-882-6688"
+    };
+
+    let siteData = JSON.parse(JSON.stringify(defaultData));
+
+    // 存储key
+    const STORAGE_KEY = "rideshare_manage_data";
+
+    function loadData() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved);
+                // 合并保证结构完整
+                siteData = { ...defaultData, ...parsed, 
+                    features: parsed.features || defaultData.features,
+                    cars: parsed.cars || defaultData.cars,
+                    hero: { ...defaultData.hero, ...(parsed.hero || {}) },
+                    contactPhone: parsed.contactPhone || defaultData.contactPhone
+                };
+            } catch(e) { console.warn(e); }
+        } else {
+            siteData = JSON.parse(JSON.stringify(defaultData));
+        }
+        // 确保每个car和feature都有id
+        if(!siteData.cars.every(c=>c.id)) siteData.cars = siteData.cars.map((c,i)=>({...c, id:c.id||`c_${Date.now()}_${i}`}));
+        if(!siteData.features.every(f=>f.id)) siteData.features = siteData.features.map((f,i)=>({...f, id:f.id||`f_${Date.now()}_${i}`}));
+    }
+
+    function saveToLocal() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData));
+    }
+
+    // 渲染前端主界面
+    function renderMainPage() {
+        // hero
+        const heroDiv = document.getElementById('heroArea');
+        if (siteData.hero.bgImage && siteData.hero.bgImage.startsWith('http') || siteData.hero.bgImage.startsWith('data:')) {
+            heroDiv.style.backgroundImage = `url(${siteData.hero.bgImage})`;
+            heroDiv.style.backgroundSize = 'cover';
+            heroDiv.style.backgroundPosition = 'center';
+        } else {
+            heroDiv.style.backgroundImage = `linear-gradient(120deg, #eaf9ea, #ffffff)`;
+        }
+        document.getElementById('heroTitle').innerText = siteData.hero.title || "高收入 · 更自由";
+        document.getElementById('heroSub').innerText = siteData.hero.subtitle || "合规营运车辆 | 保险保养全包 | 流水秒到账";
+        document.getElementById('contactPhone').innerText = siteData.contactPhone;
+
+        // 渲染优势
+        const featuresGrid = document.getElementById('featuresGrid');
+        featuresGrid.innerHTML = siteData.features.map(f => `
+            <div class="feature-card">
+                <div class="feature-icon">${f.icon || '✨'}</div>
+                <h4>${escapeHtml(f.title)}</h4>
+                <p>${escapeHtml(f.desc)}</p>
+            </div>
+        `).join('');
+
+        // 渲染车型
+        const carsGrid = document.getElementById('carsGrid');
+        carsGrid.innerHTML = siteData.cars.map(car => `
+            <div class="car-card">
+                ${car.img ? `<img class="car-img" src="${car.img}" alt="${escapeHtml(car.name)}" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20120%22%3E%3Crect%20width%3D%22200%22%20height%3D%22120%22%20fill%3D%22%23e0ecd0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23688a5e%22%3E🚖%3C%2Ftext%3E%3C%2Fsvg%3E'">` : `<div class="car-img" style="background:#e4f0e0; display:flex; align-items:center; justify-content:center; font-size:3rem;">🚕</div>`}
+                <div class="car-info">
+                    <div class="car-name">${escapeHtml(car.name)}</div>
+                    <div class="car-price">${escapeHtml(car.price)}</div>
+                    <div class="car-desc">${escapeHtml(car.desc)}</div>
+                    <button class="consult-btn" data-car-name="${escapeHtml(car.name)}">📞 立即咨询</button>
+                </div>
+            </div>
+        `).join('');
+
+        // 咨询按钮事件代理
+        document.querySelectorAll('.consult-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const carName = btn.getAttribute('data-car-name') || '车型';
+                alert(`🚖 ${carName}\n请拨打 ${siteData.contactPhone} 或联系老师获取专属方案！`);
+            });
+        });
+    }
+
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+    // ---------- 管理后台渲染 ----------
+    function renderManageCars() {
+        const container = document.getElementById('carsManageList');
+        if(!container) return;
+        container.innerHTML = siteData.cars.map((car, idx) => `
+            <div class="item-card" data-car-id="${car.id}">
+                <div class="flex-between">
+                    <strong>🚗 ${escapeHtml(car.name)}</strong>
+                    <span style="color:#07c160;">${escapeHtml(car.price)}</span>
+                </div>
+                <div style="margin: 8px 0; display:flex; gap:12px; align-items:center;">
+                    ${car.img ? `<img class="img-preview" src="${car.img}" style="width:50px;height:50px;">` : `<span style="background:#eef2ec; padding:4px 8px; border-radius:20px;">暂无图片</span>`}
+                    <span style="font-size:0.75rem;">${escapeHtml(car.desc.substring(0,50))}</span>
+                </div>
+                <div class="item-actions">
+                    <button class="edit-item" data-id="${car.id}">✏️ 编辑</button>
+                    <button class="del-item danger" data-id="${car.id}">🗑️ 删除</button>
+                </div>
+            </div>
+        `).join('');
+        // 绑定编辑删除事件
+        document.querySelectorAll('.edit-item').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = btn.getAttribute('data-id');
+                const car = siteData.cars.find(c => c.id === id);
+                if(car) openCarEditModal(car);
+            });
+        });
+        document.querySelectorAll('.del-item').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = btn.getAttribute('data-id');
+                if(confirm('确定删除该车型吗？')) {
+                    siteData.cars = siteData.cars.filter(c => c.id !== id);
+                    saveToLocal();
+                    renderManageCars();
+                    renderMainPage();
+                }
+            });
+        });
+    }
+
+    function openCarEditModal(car) {
+        const modalHtml = `
+            <div id="dynamicCarForm" class="form-row">
+                <label>车型名称</label>
+                <input id="editCarName" value="${escapeHtml(car.name)}">
+                <label>价格文案</label>
+                <input id="editCarPrice" value="${escapeHtml(car.price)}">
+                <label>描述说明</label>
+                <textarea id="editCarDesc" rows="2">${escapeHtml(car.desc)}</textarea>
+                <label>车辆图片 (点击上传)</label>
+                <input type="file" id="editCarImgUpload" accept="image/*">
+                <div id="carImgPreviewArea"><img id="editCarImgPreview" src="${car.img || ''}" style="max-width:100px; max-height:80px; border-radius:12px; margin-top:6px;"></div>
+                <div style="display:flex; gap:12px; margin-top:12px;">
+                    <button id="confirmCarEdit" style="background:#07c160; color:white;">保存修改</button>
+                    <button id="cancelCarEdit">取消</button>
+                </div>
+            </div>
+        `;
+        const modal = document.createElement('div');
+        modal.className = 'modal-mask active';
+        modal.style.position = 'fixed';
+        modal.innerHTML = `<div class="admin-panel" style="max-width:450px;"><div class="panel-header"><h3>编辑车型</h3><button class="close-panel" id="closeDynamic">×</button></div><div class="panel-body">${modalHtml}</div></div>`;
+        document.body.appendChild(modal);
+        const closeDynamic = () => modal.remove();
+        modal.querySelector('#closeDynamic').addEventListener('click', closeDynamic);
+        modal.addEventListener('click', (e) => { if(e.target === modal) closeDynamic(); });
+        const imgUpload = modal.querySelector('#editCarImgUpload');
+        const preview = modal.querySelector('#editCarImgPreview');
+        imgUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = (ev) => { preview.src = ev.target.result; };
+                reader.readAsDataURL(file);
+            }
+        });
+        modal.querySelector('#confirmCarEdit').addEventListener('click', () => {
+            const newName = modal.querySelector('#editCarName').value.trim();
+            const newPrice = modal.querySelector('#editCarPrice').value.trim();
+            const newDesc = modal.querySelector('#editCarDesc').value.trim();
+            if(!newName) return alert('请输入车型名称');
+            let newImg = car.img;
+            if(imgUpload.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    car.img = ev.target.result;
+                    car.name = newName; car.price = newPrice; car.desc = newDesc;
+                    saveToLocal(); renderManageCars(); renderMainPage(); closeDynamic();
+                };
+                reader.readAsDataURL(imgUpload.files[0]);
+            } else {
+                car.name = newName; car.price = newPrice; car.desc = newDesc; car.img = newImg;
+                saveToLocal(); renderManageCars(); renderMainPage(); closeDynamic();
+            }
+        });
+        modal.querySelector('#cancelCarEdit')?.addEventListener('click', closeDynamic);
+    }
+
+    function renderManageFeatures() {
+        const container = document.getElementById('featuresManageList');
+        if(!container) return;
+        container.innerHTML = siteData.features.map((feat, idx) => `
+            <div class="item-card" data-feat-id="${feat.id}">
+                <div><strong>${feat.icon || '✨'} ${escapeHtml(feat.title)}</strong></div>
+                <div style="font-size:0.8rem; margin:6px 0;">${escapeHtml(feat.desc)}</div>
+                <div class="item-actions">
+                    <button class="edit-feat" data-id="${feat.id}">✏️ 编辑</button>
+                    <button class="del-feat danger" data-id="${feat.id}">删除</button>
+                </div>
+            </div>
+        `).join('');
+        document.querySelectorAll('.edit-feat').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                const feat = siteData.features.find(f => f.id === id);
+                if(feat) {
+                    const newTitle = prompt('优势标题', feat.title);
+                    if(newTitle !== null) feat.title = newTitle;
+                    const newDesc = prompt('优势描述', feat.desc);
+                    if(newDesc !== null) feat.desc = newDesc;
+                    const newIcon = prompt('图标 (emoji)', feat.icon);
+                    if(newIcon !== null) feat.icon = newIcon;
+                    saveToLocal();
+                    renderManageFeatures();
+                    renderMainPage();
+                }
+            });
+        });
+        document.querySelectorAll('.del-feat').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                if(confirm('删除此优势？')) {
+                    siteData.features = siteData.features.filter(f => f.id !== id);
+                    saveToLocal();
+                    renderManageFeatures();
+                    renderMainPage();
+                }
+            });
+        });
+    }
+
+    // 新增车型模态框
+    function openAddCarModal() {
+        const newCar = { id: 'c_' + Date.now(), name: '新车型', price: '价格/天', desc: '车型亮点描述', img: '' };
+        openCarEditModal(newCar, true);
+    }
+    // 覆盖新增模式
+    const originalOpenCarEditModal = openCarEditModal;
+    window.openCarEditModal = function(car, isNew=false) {
+        const modalHtml = `
+            <div id="dynamicCarForm" class="form-row">
+                <label>车型名称</label>
+                <input id="editCarName" value="${escapeHtml(car.name)}">
+                <label>价格文案</label>
+                <input id="editCarPrice" value="${escapeHtml(car.price)}">
+                <label>描述说明</label>
+                <textarea id="editCarDesc" rows="2">${escapeHtml(car.desc)}</textarea>
+                <label>车辆图片</label>
+                <input type="file" id="editCarImgUpload" accept="image/*">
+                <div id="carImgPreviewArea"><img id="editCarImgPreview" src="${car.img || ''}" style="max-width:100px; max-height:80px;"></div>
+                <div style="display:flex; gap:12px; margin-top:12px;">
+                    <button id="confirmCarEdit" style="background:#07c160;">${isNew ? '新增车型' : '保存修改'}</button>
+                    <button id="cancelCarEdit">取消</button>
+                </div>
+            </div>
+        `;
+        const modalDiv = document.createElement('div');
+        modalDiv.className = 'modal-mask active';
+        modalDiv.innerHTML = `<div class="admin-panel" style="max-width:450px;"><div class="panel-header"><h3>${isNew ? '新增车型' : '编辑车型'}</h3><button class="close-panel" id="closeDynamic">×</button></div><div class="panel-body">${modalHtml}</div></div>`;
+        document.body.appendChild(modalDiv);
+        const close = () => modalDiv.remove();
+        modalDiv.querySelector('#closeDynamic').addEventListener('click', close);
+        modalDiv.addEventListener('click', (e) => { if(e.target === modalDiv) close(); });
+        const upload = modalDiv.querySelector('#editCarImgUpload');
+        const preview = modalDiv.querySelector('#editCarImgPreview');
+        upload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if(file) { const reader = new FileReader(); reader.onload = ev => preview.src = ev.target.result; reader.readAsDataURL(file); }
+        });
+        modalDiv.querySelector('#confirmCarEdit').addEventListener('click', () => {
+            const name = modalDiv.querySelector('#editCarName').value.trim();
+            const price = modalDiv.querySelector('#editCarPrice').value.trim();
+            const desc = modalDiv.querySelector('#editCarDesc').value.trim();
+            if(!name) return alert('请输入车型名称');
+            const handleSave = (imgData) => {
+                if(isNew) {
+                    siteData.cars.push({ id: 'c_' + Date.now(), name, price, desc, img: imgData || '' });
+                } else {
+                    car.name = name; car.price = price; car.desc = desc; if(imgData) car.img = imgData;
+                }
+                saveToLocal(); renderManageCars(); renderMainPage(); close();
+            };
+            if(upload.files.length) {
+                const reader = new FileReader();
+                reader.onload = ev => handleSave(ev.target.result);
+                reader.readAsDataURL(upload.files[0]);
+            } else { handleSave(isNew ? '' : car.img); }
+        });
+        modalDiv.querySelector('#cancelCarEdit')?.addEventListener('click', close);
+    };
+    window.openCarEditModal = openCarEditModal;
+
+    // 初始化管理面板事件
+    function bindAdminEvents() {
+        document.getElementById('openAdminBtn').onclick = () => {
+            document.getElementById('adminModal').classList.add('active');
+            renderManageCars();
+            renderManageFeatures();
+            // 基础设置赋值
+            document.getElementById('editHeroTitle').value = siteData.hero.title;
+            document.getElementById('editHeroSub').value = siteData.hero.subtitle;
+            document.getElementById('editContactPhone').value = siteData.contactPhone;
+            if(siteData.hero.bgImage) document.getElementById('heroBgPreview').src = siteData.hero.bgImage;
+            else document.getElementById('heroBgPreview').src = '';
+        };
+        document.getElementById('closeAdminBtn').onclick = () => document.getElementById('adminModal').classList.remove('active');
+        document.getElementById('adminModal').addEventListener('click', (e) => { if(e.target === document.getElementById('adminModal')) document.getElementById('adminModal').classList.remove('active'); });
+        // tabs切换
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
+                document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
+                if(btn.getAttribute('data-tab') === 'carsTab') renderManageCars();
+                if(btn.getAttribute('data-tab') === 'featuresTab') renderManageFeatures();
+            };
+        });
+        document.getElementById('addCarBtn').onclick = () => openAddCarModal();
+        document.getElementById('addFeatureBtn').onclick = () => {
+            const newId = 'f_'+Date.now();
+            siteData.features.push({ id: newId, icon: '🌟', title: '新优势', desc: '描述内容' });
+            saveToLocal(); renderManageFeatures(); renderMainPage();
+        };
+        document.getElementById('saveBasicBtn').onclick = () => {
+            siteData.hero.title = document.getElementById('editHeroTitle').value;
+            siteData.hero.subtitle = document.getElementById('editHeroSub').value;
+            siteData.contactPhone = document.getElementById('editContactPhone').value;
+            saveToLocal();
+            renderMainPage();
+            alert('基础信息已保存');
+        };
+        document.getElementById('heroBgUpload').onchange = (e) => {
+            const file = e.target.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = ev => {
+                    siteData.hero.bgImage = ev.target.result;
+                    document.getElementById('heroBgPreview').src = ev.target.result;
+                    saveToLocal();
+                    renderMainPage();
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+        document.getElementById('resetHeroBg').onclick = () => {
+            siteData.hero.bgImage = "";
+            saveToLocal();
+            renderMainPage();
+            document.getElementById('heroBgPreview').src = '';
+            alert('已恢复默认渐变背景');
+        };
+        document.getElementById('resetAllDataBtn').onclick = () => {
+            if(confirm('重置所有数据为默认（车型、优势、基础内容），不可撤销')) {
+                siteData = JSON.parse(JSON.stringify(defaultData));
+                saveToLocal();
+                renderMainPage();
+                if(document.getElementById('adminModal').classList.contains('active')) {
+                    renderManageCars(); renderManageFeatures();
+                    document.getElementById('editHeroTitle').value = siteData.hero.title;
+                    document.getElementById('editHeroSub').value = siteData.hero.subtitle;
+                    document.getElementById('editContactPhone').value = siteData.contactPhone;
+                    document.getElementById('heroBgPreview').src = '';
+                }
+                alert('已重置为默认内容');
+            }
+        };
+    }
+
+    function init() {
+        loadData();
+        renderMainPage();
+        bindAdminEvents();
+    }
+    init();
+</script>
+</body>
+</html>
