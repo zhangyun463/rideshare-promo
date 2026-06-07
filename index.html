@@ -2,853 +2,402 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>网约车伙伴招募 | 灵活高收 · 轻松开跑</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>鲲鹏行福利商城 | 分类积分兑换</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
-
         body {
-            background: #f5faf5;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: #1a2e1a;
-            line-height: 1.4;
+            background: #fef7eb;
+            font-family: 'Segoe UI', 'Roboto', system-ui, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            color: #2c2418;
+            padding: 1.5rem 1rem 3rem;
         }
-
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px 48px;
         }
-
-        /* 头部导航 */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0 20px;
-            flex-wrap: wrap;
-            gap: 12px;
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
         }
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #07c160, #0f9d4e);
+        .hero h1 {
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #b85f1a, #96400e);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: -0.5px;
-        }
-        .manage-btn {
-            background: white;
-            border: 1px solid #07c16060;
-            padding: 8px 20px;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #07c160;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-        }
-        .manage-btn:active { transform: scale(0.96); background: #f0faf0; }
-
-        /* Hero 区 */
-        .hero {
-            background: linear-gradient(120deg, #eaf9ea, #ffffff);
-            border-radius: 42px;
-            padding: 32px 24px;
-            margin-bottom: 40px;
-            text-align: center;
-            background-size: cover;
-            background-position: center;
-            transition: 0.2s;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-        }
-        .hero h2 {
-            font-size: 1.9rem;
             font-weight: 800;
-            margin-bottom: 12px;
-            color: #0a2f0a;
         }
-        .hero p {
-            font-size: 1rem;
-            color: #2b4b2b;
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0.9;
-        }
-
-        /* 优势区域 */
-        .section-title {
-            font-size: 1.7rem;
-            font-weight: 700;
-            text-align: center;
-            margin: 40px 0 24px;
-            position: relative;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-        .feature-card {
-            background: white;
-            padding: 24px 16px;
-            border-radius: 32px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
-            border: 1px solid #e2f0e2;
-            transition: 0.2s;
-        }
-        .feature-icon {
-            font-size: 2.6rem;
-            margin-bottom: 12px;
-        }
-        .feature-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-            color: #1f3b1f;
-        }
-        .feature-card p {
-            color: #5f7460;
+        .hero .tag {
+            background: #fff0e0;
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            margin-top: 0.6rem;
             font-size: 0.85rem;
-        }
-
-        /* 车型列表 */
-        .cars-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 26px;
-            margin: 20px 0 30px;
-        }
-        .car-card {
-            background: white;
-            border-radius: 32px;
-            overflow: hidden;
-            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
-            transition: all 0.2s;
-            border: 1px solid #e8f3e8;
-        }
-        .car-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background: #eef4ea;
-            display: block;
-        }
-        .car-info {
-            padding: 18px 16px 20px;
-        }
-        .car-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-        .car-price {
-            color: #07c160;
-            font-weight: 800;
-            font-size: 1.25rem;
-            margin: 8px 0;
-        }
-        .car-desc {
-            color: #6f816d;
-            font-size: 0.8rem;
-            line-height: 1.4;
-            margin-bottom: 16px;
-        }
-        .consult-btn {
-            background: #f0f9f0;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 40px;
-            color: #07c160;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            width: 100%;
-            transition: 0.2s;
-        }
-        .consult-btn:active { background: #e2f0e2; }
-
-        /* 联系区域 */
-        .contact-bar {
-            background: #ffffffd9;
-            backdrop-filter: blur(4px);
-            border-radius: 60px;
-            padding: 16px 24px;
-            margin: 48px 0 24px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            border: 1px solid #cee6ce;
-        }
-        .contact-info {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            font-size: 0.9rem;
-        }
-        .contact-info a {
-            color: #07c160;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .footer {
-            text-align: center;
-            font-size: 0.7rem;
-            color: #8ba088;
-            margin-top: 32px;
-        }
-        button {
-            cursor: pointer;
-        }
-
-        /* 模态框 管理后台 */
-        .modal-mask {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.2s;
-        }
-        .modal-mask.active {
-            visibility: visible;
-            opacity: 1;
-        }
-        .admin-panel {
-            background: white;
-            width: 90%;
-            max-width: 800px;
-            max-height: 85vh;
-            border-radius: 40px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 30px 40px rgba(0,0,0,0.2);
-        }
-        .panel-header {
-            padding: 18px 22px;
-            background: #fafffa;
-            border-bottom: 1px solid #deecde;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .panel-header h3 {
-            font-size: 1.4rem;
-            color: #07c160;
-        }
-        .close-panel {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #7c9a7c;
-        }
-        .panel-tabs {
-            display: flex;
-            gap: 8px;
-            padding: 12px 20px 0;
-            background: white;
-            border-bottom: 1px solid #e2f0e2;
-        }
-        .tab-btn {
-            background: none;
-            border: none;
-            padding: 10px 20px;
-            font-weight: 600;
-            border-radius: 40px;
-            color: #5c795c;
-        }
-        .tab-btn.active {
-            background: #07c16020;
-            color: #07c160;
-        }
-        .panel-body {
-            padding: 20px;
-            overflow-y: auto;
-            flex: 1;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .item-list {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-        .item-card {
-            background: #f9fef9;
-            border-radius: 24px;
-            padding: 16px;
-            border: 1px solid #e0ecdf;
-        }
-        .item-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 12px;
-            justify-content: flex-end;
-        }
-        .edit-item, .del-item, .add-btn {
-            background: white;
-            border: 1px solid #cfdfcf;
-            padding: 6px 16px;
-            border-radius: 60px;
-            font-size: 0.75rem;
+            color: #b45f2b;
             font-weight: 500;
         }
-        .add-btn {
-            background: #07c160;
-            color: white;
-            border: none;
-            margin-bottom: 16px;
+        .hero .tag i {
+            margin-right: 6px;
         }
-        .form-row {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-        .form-row label {
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-        .form-row input, .form-row textarea {
-            padding: 10px 14px;
-            border-radius: 30px;
-            border: 1px solid #cde0cd;
-            font-size: 0.85rem;
-        }
-        .img-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
+        .notice {
+            background: #fff3e6;
+            border-left: 5px solid #e07c2c;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.5rem;
             border-radius: 16px;
-            background: #eef2ec;
+            font-size: 0.85rem;
+            color: #a65d2a;
         }
-        .flex-between {
+        .category-section {
+            margin-bottom: 2.5rem;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px -6px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid #ffe1c4;
+        }
+        .category-title {
+            background: #fef1e2;
+            padding: 0.9rem 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #b45f2b;
+            border-bottom: 2px solid #ffddb0;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 10px;
         }
-        button.danger {
-            background: #fff0f0;
-            border-color: #ffb3b3;
-            color: #d14;
+        .category-title i {
+            font-size: 1.3rem;
+            color: #e07c2c;
         }
-        .export-btn {
-            background: #07c160;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 40px;
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        .points-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 600px;
+        }
+        .points-table th {
+            background: #fffaf5;
+            color: #8b5a2e;
             font-weight: 600;
-            margin-top: 8px;
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ffebd2;
         }
-        @media (max-width: 600px) {
-            .hero h2 { font-size: 1.5rem; }
-            .container { padding: 0 16px 32px; }
-            .contact-bar { flex-direction: column; align-items: flex-start; }
+        .points-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #ffeee0;
+            vertical-align: middle;
+        }
+        .points-table tr:hover {
+            background: #fffaf3;
+        }
+        .points-cell {
+            font-weight: 800;
+            color: #c0621e;
+            font-size: 1rem;
+        }
+        .points-unit {
+            font-size: 0.7rem;
+            font-weight: normal;
+            color: #ac6a36;
+        }
+        .exchange-btn-table {
+            background: #fef1e2;
+            border: 1px solid #ffcf97;
+            color: #c0641e;
+            border-radius: 40px;
+            padding: 0.4rem 1rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .exchange-btn-table:hover {
+            background: #ffdec0;
+            border-color: #e7a251;
+            color: #994f1a;
+            transform: scale(0.96);
+        }
+        .category-badge {
+            background: #f2e3d4;
+            border-radius: 30px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #996633;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .footer-note {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e9cfb0;
+            font-size: 0.7rem;
+            color: #b48b5a;
+        }
+        @media (max-width: 700px) {
+            .points-table th, .points-table td {
+                padding: 0.6rem 0.6rem;
+            }
+            .exchange-btn-table {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.7rem;
+            }
+            .category-title {
+                font-size: 1.1rem;
+                padding: 0.7rem 1rem;
+            }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="navbar">
-        <div class="logo">🚖 快车伙伴 · 网约车直招</div>
-        <button class="manage-btn" id="openAdminBtn">⚙️ 管理中心 · 自定义图片/价格</button>
+    <div class="hero">
+        <h1><i class="fas fa-chinese-yuan-sign"></i> 鲲鹏行·福利商城 <i class="fas fa-layer-group"></i></h1>
+        <div class="tag"><i class="fas fa-coins"></i> 纯积分兑换 · 分类浏览 · 积分低至高</div>
+        <div class="tag" style="background:#fae6d2;"><i class="fas fa-gift"></i> 积分活动进行中 | 精选积分≤350实用好物</div>
+    </div>
+    <div class="notice">
+        <i class="fas fa-star-of-life" style="color:#e07c2c;"></i> <strong>强力推荐：</strong> 大公鸡多功能清洁剂 仅需 <strong>115积分</strong>（原71积分已调整）<br>
+        <i class="fas fa-info-circle"></i> 注：本次送积分活动刚开始，已下架所有超过350积分的高价值商品，为您精选更易兑换的实用好礼，并按分类&积分排序。
     </div>
 
-    <!-- Hero 动态区域 -->
-    <div class="hero" id="heroArea" style="background-image: var(--hero-bg, linear-gradient(120deg, #eaf9ea, #ffffff)); background-size: cover;">
-        <h2 id="heroTitle">高收入 · 更自由</h2>
-        <p id="heroSub">合规营运车辆 | 保险保养全包 | 流水秒到账</p>
-    </div>
-
-    <!-- 优势区域 -->
-    <div class="section-title">✨ 为什么选择我们</div>
-    <div class="features-grid" id="featuresGrid"></div>
-
-    <!-- 车型报价 + 图片展示 -->
-    <div class="section-title">🚘 热门车型 · 透明一口价</div>
-    <div class="cars-grid" id="carsGrid"></div>
-
-    <!-- 联系栏 可编辑电话 -->
-    <div class="contact-bar" id="contactBar">
-        <div class="contact-info">
-            <span>📞 咨询热线：<strong id="contactPhone">177****8888</strong></span>
-            <span>💬 微信同号｜随时咨询</span>
+    <div id="app">
+        <!-- 动态渲染各个分类 -->
+        <div v-for="cat in filteredCategories" :key="cat.name" class="category-section">
+            <div class="category-title">
+                <i :class="cat.icon"></i>
+                <span>{{ cat.displayName }}</span>
+                <span style="font-size:0.75rem; margin-left:auto; font-weight:normal;">共 {{ cat.items.length }} 件商品</span>
+            </div>
+            <div class="table-wrapper">
+                <table class="points-table">
+                    <thead>
+                        <tr><th>商品名称</th><th style="width:110px">所需积分</th><th style="width:100px">分类</th><th style="width:100px">操作</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in cat.items" :key="item.id">
+                            <td style="font-weight:500">{{ item.name }}</td>
+                            <td class="points-cell">{{ item.points }}<span class="points-unit"> 积分</span></td>
+                            <td><span class="category-badge">{{ item.category }}</span></td>
+                            <td><button class="exchange-btn-table" @click="exchange(item)"><i class="fas fa-exchange-alt"></i> 兑换</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div>
-            <span>🏢 合规运力中心 · 快速上岗</span>
+        <div v-if="filteredCategories.length === 0" style="text-align:center; padding:3rem; background:white; border-radius:28px;">
+            <i class="fas fa-box-open" style="font-size:3rem; color:#d49c6c;"></i>
+            <p>暂无符合条件的商品，请稍后再来~</p>
         </div>
     </div>
-    <div class="footer">
-        * 所有车型均支持试跑体验 | 一人一车/双班灵活选择 | 价格透明无隐形收费
+    <div class="footer-note">
+        <i class="fas fa-store"></i> 商品库存及核销以门店为准 · 积分以下单时商城确认为准 · 点击兑换请联系管理员核销
     </div>
 </div>
 
-<!-- 管理后台模态框 -->
-<div id="adminModal" class="modal-mask">
-    <div class="admin-panel">
-        <div class="panel-header">
-            <h3>📋 内容管理中心</h3>
-            <button class="close-panel" id="closeAdminBtn">&times;</button>
-        </div>
-        <div class="panel-tabs">
-            <button class="tab-btn active" data-tab="carsTab">🚕 车型管理（图片/价格）</button>
-            <button class="tab-btn" data-tab="featuresTab">🌟 优势管理</button>
-            <button class="tab-btn" data-tab="basicTab">⚙️ 基础设置</button>
-        </div>
-        <div class="panel-body">
-            <!-- 车型管理 -->
-            <div id="carsTab" class="tab-content active">
-                <button class="add-btn" id="addCarBtn">+ 新增车型</button>
-                <div id="carsManageList" class="item-list"></div>
-            </div>
-            <!-- 优势管理 -->
-            <div id="featuresTab" class="tab-content">
-                <button class="add-btn" id="addFeatureBtn">+ 新增优势</button>
-                <div id="featuresManageList" class="item-list"></div>
-            </div>
-            <!-- 基础设置 -->
-            <div id="basicTab" class="tab-content">
-                <div class="form-row">
-                    <label>🏙️ Hero 背景图片 (点击上传)</label>
-                    <input type="file" id="heroBgUpload" accept="image/*">
-                    <div style="margin-top: 8px;"><img id="heroBgPreview" style="max-width:100%; max-height:120px; border-radius:20px;" src=""></div>
-                    <button id="resetHeroBg" style="margin-top:8px; background:#f0f0f0;">恢复默认渐变</button>
-                </div>
-                <div class="form-row">
-                    <label>📢 主标题</label>
-                    <input type="text" id="editHeroTitle" placeholder="主标题">
-                </div>
-                <div class="form-row">
-                    <label>📄 副标题</label>
-                    <input type="text" id="editHeroSub" placeholder="副标题">
-                </div>
-                <div class="form-row">
-                    <label>📞 咨询电话（显示在底部）</label>
-                    <input type="text" id="editContactPhone" placeholder="联系电话">
-                </div>
-                <div class="form-row">
-                    <button id="saveBasicBtn" style="background:#07c160; color:white; border:none; padding:12px; border-radius:60px;">保存基础信息</button>
-                </div>
-                <div class="form-row">
-                    <button id="resetAllDataBtn" style="background:#ffefef; border:1px solid #ffb7b7; color:#bc4e4e;">重置所有数据为默认</button>
-                </div>
-                <div class="form-row">
-                    <button id="exportFullHtmlBtn" class="export-btn">📤 导出当前配置为完整HTML文件（用于更新部署）</button>
-                    <p style="font-size:0.7rem; color:#6f816d;">点击后将下载一个包含当前所有图片&数据的新HTML文件，替换原文件上传到GitHub即可让所有访客看到最新内容。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 <script>
-    // ---------- 默认数据 ----------
-    const defaultData = {
-        hero: {
-            bgImage: "", // 空表示渐变
-            title: "高收入 · 更自由",
-            subtitle: "合规营运车辆 | 保险保养全包 | 流水秒到账"
-        },
-        features: [
-            { id: "f1", icon: "💰", title: "收入透明", desc: "每日流水自主提现，无抽成，多劳多得，月入过万很轻松" },
-            { id: "f2", icon: "⚡", title: "极速上岗", desc: "最快3天提车，协助办理人证/车证，专业培训支持" },
-            { id: "f3", icon: "🛡️", title: "养车无忧", desc: "公司承担保险、保养、维修，只跑车，不分心" },
-            { id: "f4", icon: "📈", title: "灵活模式", desc: "日租/周租/月租，一人一车或双班，自由选择" }
-        ],
-        cars: [
-            { id: "c1", name: "比亚迪·秦EV", price: "低至 159元/天", desc: "续航450km，快充30分钟，空间宽敞，合规网约车专用", img: "" },
-            { id: "c2", name: "广汽埃安 S", price: "179元/天", desc: "炫酷外观，舒适座舱，百公里电耗仅12度，省电多赚", img: "" },
-            { id: "c3", name: "荣威 Ei5", price: "149元/天", desc: "旅行车大空间，营运版质保，售后全包，日租超值", img: "" },
-            { id: "c4", name: "吉利几何A", price: "169元/天", desc: "科技内饰，L2辅助，续航扎实，司机好评率高", img: "" }
-        ],
-        contactPhone: "400-882-6688"
+    // 积分计算函数 (价格 * 3.75 四舍五入)
+    function calcPoints(price) {
+        return Math.round(price * 3.75);
+    }
+
+    // ======================= 原始商品数据（所有商品） =======================
+    // 1. Excel商品 (积分已给出)
+    const excelProducts = [
+        { name: "田作故事妈妈米饭有机五常大米5kg", points: 338, category: "粮油" },
+        { name: "田作故事金禾寒地稻香米5kg", points: 150, category: "粮油" },
+        { name: "天友百特有机纯牛奶", points: 237, category: "乳品" },
+        { name: "天友百特有机纯牛奶（康美包）250ml×12", points: 188, category: "乳品" },
+        { name: "鲁花低芥酸特香菜籽油（定制）5L", points: 338, category: "粮油" },
+        { name: "鲁花5s压榨一级花生油", points: 589, category: "粮油" },      // >350 待过滤
+        { name: "长安花高原小粒低芥酸菜籽油（压榨清香）", points: 338, category: "粮油" },
+        { name: "长安花高原小粒菜籽油（压榨醇香）5.439L", points: 300, category: "粮油" },
+        { name: "壹禄鸿丝苗米5kg", points: 76, category: "粮油" },
+        { name: "重百优选玉米胚芽油", points: 207, category: "粮油" },
+        { name: "惠尚老厨房纯正菜籽油5L", points: 207, category: "粮油" },
+        { name: "太粮柬埔寨茉莉香米5kG", points: 162, category: "粮油" },
+        { name: "太粮华稻金蛇献瑞五常大米5KG", points: 203, category: "粮油" }
+    ];
+
+    // 2. 端午粽子系列 (价格 -> 积分)
+    const zongziRaw = [
+        { name: "稻香村黄精莲子陈皮豆沙粽 240g", price: 15.8 },
+        { name: "稻香村西洋参枸杞鲜肉粽 240g", price: 16.8 },
+        { name: "稻香村决明子菊花蜜枣粽 240g", price: 15.8 },
+        { name: "稻香村茯苓桂花紫薯粽 240g", price: 15.8 },
+        { name: "饼诚记紫米山药百合莲子粽 120g*2", price: 16.8 },
+        { name: "饼诚记紫米红枣枸杞薏仁粽 120g*2", price: 16.8 },
+        { name: "火宫殿辣椒炒肉粽 240g", price: 15.8 },
+        { name: "火宫殿香辣酱板鸭粽 240g", price: 15.8 },
+        { name: "火宫殿孜然牛肉粽 240g", price: 18.8 },
+        { name: "火宫殿香辣口味虾粽 240g", price: 18.8 },
+        { name: "五芳斋真空五芳大肉粽 280g", price: 21.9 },
+        { name: "五芳斋真空蛋黄猪肉粽 280g", price: 22.9 },
+        { name: "五芳斋真空爆料红烧五花肉粽 280g", price: 26.9 }
+    ];
+    const zongziProducts = zongziRaw.map(item => ({
+        name: item.name,
+        points: calcPoints(item.price),
+        category: "端午粽礼"
+    }));
+
+    // 3. 个人护理 & 家居清洁 (价格 -> 积分)  + 特别调整大公鸡积分
+    const careRaw = [
+        { name: "后拱辰享紧塑系列礼盒 6件套", price: 499 },
+        { name: "清可新4合1樱花留香洗衣凝珠 60粒", price: 65 },
+        { name: "花王柔顺剂 (缤纷百花香)", price: 21 },
+        { name: "大公鸡多功能清洁剂", price: 18.9 },       // 特殊调整：原71积分，现改为115
+        { name: "妙管家厨房重油污清洁剂-元气西柚 480g*2", price: 19.9 },
+        { name: "螺印马油礼品套装 (洗发水600ml+沐浴露600ml+洗发水80ml+沐浴露80ml)", price: 99 },
+        { name: "贝德美蓝甘菊清爽洗护四件套", price: 69 },
+        { name: "惠润绿野芳香洗护+柑桔沐浴露套装", price: 125 },
+        { name: "丝塔芙舒润保湿霜 250g", price: 89 },
+        { name: "黛珂多重防晒乳 60ml", price: 179 },
+        { name: "资生堂新艳阳复颜水动力防护乳液", price: 179 },
+        { name: "小林沁醒舒清凉喷雾 (超爽薄荷香型)", price: 32.9 },
+        { name: "乐比叮防护喷雾剂 (无香) 200ml", price: 49 }
+    ];
+    let careProducts = careRaw.map(item => {
+        let pts = calcPoints(item.price);
+        // 特殊处理：大公鸡多功能清洁剂强制设为115积分
+        if (item.name === "大公鸡多功能清洁剂") {
+            pts = 115;
+        }
+        return {
+            name: item.name,
+            points: pts,
+            category: "个护家清"
+        };
+    });
+
+    // 4. 精品食用油补充 (价格 -> 积分)
+    const extraOilRaw = [
+        { name: "晟麦食用油礼盒 (牛油果油+有机亚麻籽油+有机核桃油) 250ml*3", price: 64.9 },
+        { name: "福临门营养家亚麻籽油喷雾装 200ml", price: 29 },
+        { name: "晟麦牛油果油 1L", price: 74.9 },
+        { name: "安达露西橄榄油 750ml", price: 60 },
+        { name: "鲁花特级初榨橄榄油 700ml", price: 99.9 },
+        { name: "鲁花亚麻籽油 1.6L", price: 59.9 },
+        { name: "欧丽薇兰特级初榨橄榄油 双子装", price: 149 },
+        { name: "贝蒂斯特级初榨橄榄油 礼盒装", price: 298 },   // 298 < 350, 保留
+        { name: "鲁花高油酸花生油 750ml*2", price: 99.9 },
+        { name: "多力葵花籽油 5L", price: 82.9 },
+        { name: "金龙鱼外婆乡小榨菜籽油 5L", price: 99.9 },
+        { name: "福临门家香味老家土榨菜籽油 5.68L", price: 96 },
+        { name: "福临门营养家亚麻籽油 5L", price: 99.9 }
+    ];
+    const extraOilProducts = extraOilRaw.map(item => ({
+        name: item.name,
+        points: calcPoints(item.price),
+        category: "粮油"
+    }));
+
+    // ========= 合并所有商品 =========
+    let allProducts = [
+        ...excelProducts,
+        ...zongziProducts,
+        ...careProducts,
+        ...extraOilProducts
+    ];
+
+    // 过滤条件：积分 <= 350 （删除超过350积分的高价值商品）
+    // 同时排除鲁花5s压榨一级花生油589分，后拱辰享礼盒499分也会被过滤（原价499*3.75≈1871，远超350，删除）
+    // 注意后拱辰享积分原先calcPoints(499)=1871，远大于350，自动过滤
+    const MAX_POINTS = 350;
+    let filteredProducts = allProducts.filter(item => item.points <= MAX_POINTS);
+
+    // 额外确保: 虽然大公鸡已经被手工设为115，满足条件；清理任何可能的脏数据
+    // 按分类分组
+    const categoryMap = new Map(); // key: 分类显示名, value: { displayName, icon, items: [] }
+
+    // 定义分类显示顺序及图标
+    const categoryOrder = ["粮油", "乳品", "端午粽礼", "个护家清"];
+    const categoryIcons = {
+        "粮油": "fas fa-wheat-alt",
+        "乳品": "fas fa-tint",
+        "端午粽礼": "fas fa-egg",
+        "个护家清": "fas fa-hand-sparkles"
     };
 
-    let siteData = JSON.parse(JSON.stringify(defaultData));
+    // 初始化分组
+    categoryOrder.forEach(cat => {
+        categoryMap.set(cat, {
+            displayName: cat,
+            icon: categoryIcons[cat] || "fas fa-tag",
+            items: []
+        });
+    });
 
-    const STORAGE_KEY = "rideshare_manage_data";
-
-    function loadData() {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            try {
-                const parsed = JSON.parse(saved);
-                // 合并保证结构完整
-                siteData = { ...defaultData, ...parsed, 
-                    features: parsed.features || defaultData.features,
-                    cars: parsed.cars || defaultData.cars,
-                    hero: { ...defaultData.hero, ...(parsed.hero || {}) },
-                    contactPhone: parsed.contactPhone || defaultData.contactPhone
-                };
-            } catch(e) { console.warn(e); }
+    // 将商品放入对应分组，并过滤掉未知分类（理论上都有）
+    filteredProducts.forEach(product => {
+        const catName = product.category;
+        if (categoryMap.has(catName)) {
+            categoryMap.get(catName).items.push(product);
         } else {
-            siteData = JSON.parse(JSON.stringify(defaultData));
+            // 兜底：若出现未定义分类（正常不会），归入其他
+            if (!categoryMap.has("其他")) {
+                categoryMap.set("其他", { displayName: "其他", icon: "fas fa-box", items: [] });
+            }
+            categoryMap.get("其他").items.push(product);
         }
-        // 确保每个car和feature都有id
-        if(!siteData.cars.every(c=>c.id)) siteData.cars = siteData.cars.map((c,i)=>({...c, id:c.id||`c_${Date.now()}_${i}`}));
-        if(!siteData.features.every(f=>f.id)) siteData.features = siteData.features.map((f,i)=>({...f, id:f.id||`f_${Date.now()}_${i}`}));
-    }
+    });
 
-    function saveToLocal() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData));
-    }
-
-    // 渲染前端主界面
-    function renderMainPage() {
-        // hero
-        const heroDiv = document.getElementById('heroArea');
-        if (siteData.hero.bgImage && (siteData.hero.bgImage.startsWith('http') || siteData.hero.bgImage.startsWith('data:'))) {
-            heroDiv.style.backgroundImage = `url(${siteData.hero.bgImage})`;
-            heroDiv.style.backgroundSize = 'cover';
-            heroDiv.style.backgroundPosition = 'center';
-        } else {
-            heroDiv.style.backgroundImage = `linear-gradient(120deg, #eaf9ea, #ffffff)`;
+    // 每个分类内部按照积分升序排序
+    const finalCategories = [];
+    for (let [catKey, catData] of categoryMap.entries()) {
+        // 只显示有商品的分组
+        if (catData.items.length > 0) {
+            // 排序积分低->高
+            catData.items.sort((a, b) => a.points - b.points);
+            // 为每个商品添加唯一ID (用于key)
+            catData.items = catData.items.map((item, idx) => ({
+                ...item,
+                id: `${catKey}-${item.name}-${idx}`
+            }));
+            finalCategories.push(catData);
         }
-        document.getElementById('heroTitle').innerText = siteData.hero.title || "高收入 · 更自由";
-        document.getElementById('heroSub').innerText = siteData.hero.subtitle || "合规营运车辆 | 保险保养全包 | 流水秒到账";
-        document.getElementById('contactPhone').innerText = siteData.contactPhone;
-
-        // 渲染优势
-        const featuresGrid = document.getElementById('featuresGrid');
-        featuresGrid.innerHTML = siteData.features.map(f => `
-            <div class="feature-card">
-                <div class="feature-icon">${escapeHtml(f.icon || '✨')}</div>
-                <h4>${escapeHtml(f.title)}</h4>
-                <p>${escapeHtml(f.desc)}</p>
-            </div>
-        `).join('');
-
-        // 渲染车型
-        const carsGrid = document.getElementById('carsGrid');
-        carsGrid.innerHTML = siteData.cars.map(car => `
-            <div class="car-card">
-                ${car.img ? `<img class="car-img" src="${car.img}" alt="${escapeHtml(car.name)}" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20120%22%3E%3Crect%20width%3D%22200%22%20height%3D%22120%22%20fill%3D%22%23e0ecd0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23688a5e%22%3E🚖%3C%2Ftext%3E%3C%2Fsvg%3E'">` : `<div class="car-img" style="background:#e4f0e0; display:flex; align-items:center; justify-content:center; font-size:3rem;">🚕</div>`}
-                <div class="car-info">
-                    <div class="car-name">${escapeHtml(car.name)}</div>
-                    <div class="car-price">${escapeHtml(car.price)}</div>
-                    <div class="car-desc">${escapeHtml(car.desc)}</div>
-                    <button class="consult-btn" data-car-name="${escapeHtml(car.name)}">📞 立即咨询</button>
-                </div>
-            </div>
-        `).join('');
-
-        // 咨询按钮事件代理
-        document.querySelectorAll('.consult-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const carName = btn.getAttribute('data-car-name') || '车型';
-                alert(`🚖 ${carName}\n请拨打 ${siteData.contactPhone} 或联系老师获取专属方案！`);
-            });
-        });
     }
 
-    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+    // 按指定顺序重新排列（确保显示顺序与categoryOrder一致，未在order中的放最后）
+    finalCategories.sort((a, b) => {
+        let idxA = categoryOrder.indexOf(a.displayName);
+        let idxB = categoryOrder.indexOf(b.displayName);
+        if (idxA === -1) idxA = 999;
+        if (idxB === -1) idxB = 999;
+        return idxA - idxB;
+    });
 
-    // ---------- 管理后台渲染 ----------
-    function renderManageCars() {
-        const container = document.getElementById('carsManageList');
-        if(!container) return;
-        container.innerHTML = siteData.cars.map((car, idx) => `
-            <div class="item-card" data-car-id="${car.id}">
-                <div class="flex-between">
-                    <strong>🚗 ${escapeHtml(car.name)}</strong>
-                    <span style="color:#07c160;">${escapeHtml(car.price)}</span>
-                </div>
-                <div style="margin: 8px 0; display:flex; gap:12px; align-items:center;">
-                    ${car.img ? `<img class="img-preview" src="${car.img}" style="width:50px;height:50px;">` : `<span style="background:#eef2ec; padding:4px 8px; border-radius:20px;">暂无图片</span>`}
-                    <span style="font-size:0.75rem;">${escapeHtml(car.desc.substring(0,50))}</span>
-                </div>
-                <div class="item-actions">
-                    <button class="edit-item" data-id="${car.id}">✏️ 编辑</button>
-                    <button class="del-item danger" data-id="${car.id}">🗑️ 删除</button>
-                </div>
-            </div>
-        `).join('');
-        // 绑定编辑删除事件
-        document.querySelectorAll('.edit-item').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = btn.getAttribute('data-id');
-                const car = siteData.cars.find(c => c.id === id);
-                if(car) openCarEditModal(car);
-            });
-        });
-        document.querySelectorAll('.del-item').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = btn.getAttribute('data-id');
-                if(confirm('确定删除该车型吗？')) {
-                    siteData.cars = siteData.cars.filter(c => c.id !== id);
-                    saveToLocal();
-                    renderManageCars();
-                    renderMainPage();
-                }
-            });
-        });
-    }
-
-    function openCarEditModal(car, isNew=false) {
-        const modalHtml = `
-            <div id="dynamicCarForm" class="form-row">
-                <label>车型名称</label>
-                <input id="editCarName" value="${escapeHtml(car.name)}">
-                <label>价格文案</label>
-                <input id="editCarPrice" value="${escapeHtml(car.price)}">
-                <label>描述说明</label>
-                <textarea id="editCarDesc" rows="2">${escapeHtml(car.desc)}</textarea>
-                <label>车辆图片 (点击上传)</label>
-                <input type="file" id="editCarImgUpload" accept="image/*">
-                <div id="carImgPreviewArea"><img id="editCarImgPreview" src="${car.img || ''}" style="max-width:100px; max-height:80px; border-radius:12px; margin-top:6px;"></div>
-                <div style="display:flex; gap:12px; margin-top:12px;">
-                    <button id="confirmCarEdit" style="background:#07c160; color:white;">${isNew ? '新增车型' : '保存修改'}</button>
-                    <button id="cancelCarEdit">取消</button>
-                </div>
-            </div>
-        `;
-        const modalDiv = document.createElement('div');
-        modalDiv.className = 'modal-mask active';
-        modalDiv.innerHTML = `<div class="admin-panel" style="max-width:450px;"><div class="panel-header"><h3>${isNew ? '新增车型' : '编辑车型'}</h3><button class="close-panel" id="closeDynamic">×</button></div><div class="panel-body">${modalHtml}</div></div>`;
-        document.body.appendChild(modalDiv);
-        const close = () => modalDiv.remove();
-        modalDiv.querySelector('#closeDynamic').addEventListener('click', close);
-        modalDiv.addEventListener('click', (e) => { if(e.target === modalDiv) close(); });
-        const upload = modalDiv.querySelector('#editCarImgUpload');
-        const preview = modalDiv.querySelector('#editCarImgPreview');
-        upload.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if(file) { const reader = new FileReader(); reader.onload = ev => preview.src = ev.target.result; reader.readAsDataURL(file); }
-        });
-        modalDiv.querySelector('#confirmCarEdit').addEventListener('click', () => {
-            const name = modalDiv.querySelector('#editCarName').value.trim();
-            const price = modalDiv.querySelector('#editCarPrice').value.trim();
-            const desc = modalDiv.querySelector('#editCarDesc').value.trim();
-            if(!name) return alert('请输入车型名称');
-            const handleSave = (imgData) => {
-                if(isNew) {
-                    siteData.cars.push({ id: 'c_' + Date.now(), name, price, desc, img: imgData || '' });
-                } else {
-                    car.name = name; car.price = price; car.desc = desc; if(imgData) car.img = imgData;
-                }
-                saveToLocal(); renderManageCars(); renderMainPage(); close();
-            };
-            if(upload.files.length) {
-                const reader = new FileReader();
-                reader.onload = ev => handleSave(ev.target.result);
-                reader.readAsDataURL(upload.files[0]);
-            } else { handleSave(isNew ? '' : car.img); }
-        });
-        modalDiv.querySelector('#cancelCarEdit')?.addEventListener('click', close);
-    }
-
-    function renderManageFeatures() {
-        const container = document.getElementById('featuresManageList');
-        if(!container) return;
-        container.innerHTML = siteData.features.map((feat, idx) => `
-            <div class="item-card" data-feat-id="${feat.id}">
-                <div><strong>${feat.icon || '✨'} ${escapeHtml(feat.title)}</strong></div>
-                <div style="font-size:0.8rem; margin:6px 0;">${escapeHtml(feat.desc)}</div>
-                <div class="item-actions">
-                    <button class="edit-feat" data-id="${feat.id}">✏️ 编辑</button>
-                    <button class="del-feat danger" data-id="${feat.id}">删除</button>
-                </div>
-            </div>
-        `).join('');
-        document.querySelectorAll('.edit-feat').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.getAttribute('data-id');
-                const feat = siteData.features.find(f => f.id === id);
-                if(feat) {
-                    const newTitle = prompt('优势标题', feat.title);
-                    if(newTitle !== null) feat.title = newTitle;
-                    const newDesc = prompt('优势描述', feat.desc);
-                    if(newDesc !== null) feat.desc = newDesc;
-                    const newIcon = prompt('图标 (emoji)', feat.icon);
-                    if(newIcon !== null) feat.icon = newIcon;
-                    saveToLocal();
-                    renderManageFeatures();
-                    renderMainPage();
-                }
-            });
-        });
-        document.querySelectorAll('.del-feat').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.getAttribute('data-id');
-                if(confirm('删除此优势？')) {
-                    siteData.features = siteData.features.filter(f => f.id !== id);
-                    saveToLocal();
-                    renderManageFeatures();
-                    renderMainPage();
-                }
-            });
-        });
-    }
-
-    // 新增车型
-    function openAddCarModal() {
-        const newCar = { id: 'c_' + Date.now(), name: '新车型', price: '价格/天', desc: '车型亮点描述', img: '' };
-        openCarEditModal(newCar, true);
-    }
-
-    // 导出完整HTML文件（包含当前配置）
-    function exportFullHtml() {
-        // 获取当前所有数据（深拷贝）
-        const currentData = JSON.parse(JSON.stringify(siteData));
-        // 获取当前HTML文件内容，并替换其中的默认数据部分
-        const htmlContent = document.documentElement.outerHTML;
-        // 构建新HTML：需要将当前数据注入到脚本中，覆盖默认数据和localStorage初始化
-        // 方法：创建一个新的HTML字符串，在现有基础上，在script中增加一个覆盖初始数据的逻辑。
-        // 由于代码中加载数据时会先读取localStorage，我们可以修改初始赋值逻辑，直接让默认数据等于currentData。
-        // 最简单：生成一份独立HTML，其中siteData直接等于currentData，并去除localStorage读取，强制使用内置数据。
-        // 我们复制当前页面结构，但修改JavaScript部分，将默认数据替换为currentData，并取消localStorage读取（但保留保存功能以便后续继续修改）。
-        // 更好的做法：保留localStorage机制，但将初始数据设置为currentData，这样新页面第一次加载就会使用currentData，后续修改仍然保存到localStorage。
-        
-        // 获取当前页面的完整HTML文本
-        let html = document.documentElement.outerHTML;
-        // 在</head>前插入一个meta确保字符集
-        // 由于outerHTML可能包含当前作用域的变量，我们需要构建新字符串
-        // 更稳妥：通过fetch获取当前页面源码并替换？但更简单：基于当前模板重建。
-        // 这里直接利用Blob生成新文件，将siteData序列化为JSON字符串，并在页面加载时覆盖localStorage初始数据。
-        // 我们可以在页面最顶部script中先设置localStorage，然后再加载。
-        const exportDataStr = JSON.stringify(currentData);
-        // 构建新的HTML内容，在原页面基础上增加一段初始化localStorage的脚本
-        // 注意：原页面加载时，会调用loadData()从localStorage读取，如果没有则使用defaultData。
-        // 我们在页面开始处强行写入localStorage，确保loadData读取到的是当前数据。
-        const injectScript = `
-        <script>
-            // 注入当前配置到localStorage，确保首次加载即使用最新内容
-            (function() {
-                const exportedData = ${exportDataStr};
-                if (exportedData) {
-                    localStorage.setItem('${STORAGE_KEY}', JSON.stringify(exportedData));
-                }
-            })();
-        <\/script>
-        `;
-        // 在<head>后插入
-        let newHtml = html.replace('</head>', injectScript + '</head>');
-        // 下载
-        const blob = new Blob([newHtml], { type: 'text/html' });
-        const link = document.createElement('a');
-        const url = URL.createObjectURL(blob);
-        link.href = url;
-        link.download = 'rideshare_updated.html';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-        alert('已导出包含当前配置的HTML文件。请将该文件重命名为 index.html 并上传到GitHub覆盖原文件，之后所有访客都将看到最新内容。');
-    }
-
-    function bindAdminEvents() {
-        document.getElementById('openAdminBtn').onclick = () => {
-            document.getElementById('adminModal').classList.add('active');
-            renderManageCars();
-            renderManageFeatures();
-            // 基础设置赋值
-            document.getElementById('editHeroTitle').value = siteData.hero.title;
-            document.getElementById('editHeroSub').value = siteData.hero.subtitle;
-            document.getElementById('editContactPhone').value = siteData.contactPhone;
-            if(siteData.hero.bgImage) document.getElementById('heroBgPreview').src = siteData.hero.bgImage;
-            else document.getElementById('heroBgPreview').src = '';
-        };
-        document.getElementById('closeAdminBtn').onclick = () => document.getElementById('adminModal').classList.remove('active');
-        document.getElementById('adminModal').addEventListener('click', (e) => { if(e.target === document.getElementById('adminModal')) document.getElementById('adminModal').classList.remove('active'); });
-        // tabs切换
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.onclick = () => {
-                document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-                btn.classList.add('active');
-                document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
-                document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
-                if(btn.getAttribute('data-tab') === 'carsTab') renderManageCars();
-                if(btn.getAttribute('data-tab') === 'featuresTab') renderManageFeatures();
-            };
-        });
-        document.getElementById('addCarBtn').onclick = () => openAddCarModal();
-        document.getElementById('addFeatureBtn').onclick = () => {
-            const newId = 'f_'+Date.now();
-            siteData.features.push({ id: newId, icon: '🌟', title: '新优势', desc: '描述内容' });
-            saveToLocal(); renderManageFeatures(); renderMainPage();
-        };
-        document.getElementById('saveBasicBtn').onclick = () => {
-            siteData.hero.title = document.getElementById('editHeroTitle').value;
-            siteData.hero.subtitle = document.getElementById('editHeroSub').value;
-            siteData.contactPhone = document.getElementById('editContactPhone').value;
-            saveToLocal();
-            renderMainPage();
-            alert('基础信息已保存');
-        };
-        document.getElementById('heroBgUpload').onchange = (e) => {
-            const file = e.target.files[0];
-            if(file) {
-                const reader = new FileReader();
-                reader.onload = ev => {
-                    siteData.hero.bgImage = ev.target.result;
-                    document.getElementById('heroBgPreview').src = ev.target.result;
-                    saveToLocal();
-                    renderMainPage();
-                };
-                reader.readAsDataURL(file);
+    // Vue 渲染
+    new Vue({
+        el: '#app',
+        data: {
+            filteredCategories: finalCategories
+        },
+        methods: {
+            exchange(item) {
+                alert(`🎉 兑换申请\n商品：「${item.name}」\n所需积分：${item.points} 分\n✨ 请前往「我的订单」出示核销码，或联系管理员线下核销。`);
             }
-        };
-        document.getElementById('resetHeroBg').onclick = () => {
-            siteData.hero.bgImage = "";
-            saveToLocal();
-            renderMainPage();
-            document.getElementById('heroBgPreview').src = '';
-            alert('已恢复默认渐变背景');
-        };
-        document.getElementById('resetAllDataBtn').onclick = () => {
-            if(confirm('重置所有数据为默认（车型、优势、基础内容），不可撤销')) {
-                siteData = JSON.parse(JSON.stringify(defaultData));
-                saveToLocal();
-                renderMainPage();
-                if(document.getElementById('adminModal').classList.contains('active')) {
-                    renderManageCars(); renderManageFeatures();
-                    document.getElementById('editHeroTitle').value = siteData.hero.title;
-                    document.getElementById('editHeroSub').value = siteData.hero.subtitle;
-                    document.getElementById('editContactPhone').value = siteData.contactPhone;
-                    document.getElementById('heroBgPreview').src = '';
-                }
-                alert('已重置为默认内容');
-            }
-        };
-        // 导出按钮
-        document.getElementById('exportFullHtmlBtn').onclick = () => {
-            if(confirm('导出当前配置为HTML文件？导出的文件将包含您当前所有车型图片、优势、背景等配置。下载后请替换原文件并重新部署。')) {
-                exportFullHtml();
-            }
-        };
-    }
-
-    function init() {
-        loadData();
-        renderMainPage();
-        bindAdminEvents();
-    }
-    init();
+        }
+    });
 </script>
 </body>
 </html>
